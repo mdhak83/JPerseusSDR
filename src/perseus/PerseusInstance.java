@@ -1,54 +1,10 @@
-package perseus;
-
-import java.io.FileWriter;
-import perseus.callback.InputCallback;
-import perseus.callback.InputQueue;
-import perseus.circuits.EEPROM;
-import static perseus.circuits.EEPROM.ADDR_EEPROM_PRODID;
-import static perseus.circuits.EEPROM.ADDR_EEPROM_PRODID_SIZE;
-import perseus.circuits.FPGA;
-import perseus.circuits.Firmware;
-import perseus.circuits.FirmwareBlock;
-import perseus.circuits.Preselector;
-import perseus.circuits.Attenuator;
-import perseus.circuits.PreselectorFilter;
-import perseus.circuits.SIOControl;
-import static perseus.utils.Definitions.*;
-import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.nio.IntBuffer;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.usb4java.ConfigDescriptor;
-import org.usb4java.Context;
-import org.usb4java.Device;
-import org.usb4java.DeviceDescriptor;
-import org.usb4java.DeviceHandle;
-import org.usb4java.DeviceList;
-import org.usb4java.Interface;
-import org.usb4java.InterfaceDescriptor;
-import org.usb4java.LibUsb;
-import org.usb4java.LibUsbException;
-import perseus.test.PerseusTest;
-import static perseus.test.PerseusTest.BufferCounter;
-import static perseus.test.PerseusTest.SDF_DATE_TIME;
-import static perseus.test.PerseusTest.SamplesCounter;
-
 /**
- * Class used to represent an instance of a Perseus SDR hardware connected to the computer.
- * 
- * The JPerseusSDR v1.0.0 library is free software; you can redistribute 
+ * The JPerseusSDR library is free software; you can redistribute 
  * it and/or modify it under the terms of the GNU Lesser General Public 
  * License as published by the Free Software Foundation; either version 
  * 3.0 of the License, or (at your option) any later version.
  * 
- * The JPerseusSDR v1.0.0 library is distributed in the hope that it will
+ * The JPerseusSDR library is distributed in the hope that it will
  * be useful, but WITHOUT ANY WARRANTY; without even the implied warranty 
  * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  
  * See the GNU Lesser General Public License for more details.
@@ -70,14 +26,55 @@ import static perseus.test.PerseusTest.SamplesCounter;
  *  originally written by Nicolangelo PALERMO and maintained by Andrea MONTEFUSCO. This library can be found at :
  *  - https://github.com/Microtelecom/libperseus-sdr
  * 
- * The JPerseus v1.0.0 library, source code and documentation is published under the GNU Lesser General Public Licence v3
+ * The JPerseus library, source code and documentation is published under the GNU Lesser General Public Licence v3
  *  (available under the folder "/resources").
  * 
- * @author Mehdi DHAKOUANI
  * Copyright 2017, Mehdi DHAKOUANI
- * @version 1.0.0
  */
-public class PerseusInstance implements Runnable, InputCallback {
+package perseus;
+
+import java.io.FileWriter;
+import perseus.callback.InputCallback;
+import perseus.callback.InputQueue;
+import perseus.circuits.EEPROM;
+import static perseus.circuits.EEPROM.ADDR_EEPROM_PRODID;
+import static perseus.circuits.EEPROM.ADDR_EEPROM_PRODID_SIZE;
+import perseus.circuits.FPGA;
+import perseus.circuits.Firmware;
+import perseus.circuits.FirmwareBlock;
+import perseus.circuits.Preselector;
+import perseus.circuits.Attenuator;
+import perseus.circuits.PreselectorFilter;
+import perseus.circuits.SIOControl;
+import static perseus.utils.Definitions.*;
+import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.nio.IntBuffer;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.usb4java.ConfigDescriptor;
+import org.usb4java.Context;
+import org.usb4java.Device;
+import org.usb4java.DeviceDescriptor;
+import org.usb4java.DeviceHandle;
+import org.usb4java.DeviceList;
+import org.usb4java.Interface;
+import org.usb4java.InterfaceDescriptor;
+import org.usb4java.LibUsb;
+import org.usb4java.LibUsbException;
+
+/**
+ * Class used to represent an instance of a Perseus SDR hardware connected to the computer.
+ * 
+ * @author Mehdi DHAKOUANI
+ * @version 1.0.1
+ */
+public class PerseusInstance {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////
     // PERSEUS SDR static members
@@ -408,8 +405,9 @@ public class PerseusInstance implements Runnable, InputCallback {
     /**
      * Read the EEPROM containing information about the device (SN, HW/SW version, etc.)
      * Use the bulk transfer method
+     * @param fw_log The log output file to write to.
      */
-    public void readEEPROM() {
+    public void readEEPROM(FileWriter fw_log) {
         if (this.firmwareLoaded) {
             int ret;
             ByteBuffer eeprom_read_cmd = ByteBuffer.allocateDirect(4);
@@ -426,7 +424,13 @@ public class PerseusInstance implements Runnable, InputCallback {
                     if ((ret = LibUsb.bulkTransfer(this.handle, PERSEUS_EP_STATUS, response, transferred, FX2_TIMEOUT)) == LibUsb.SUCCESS) {
                         this.eeprom = new EEPROM(response);
                         if (this.eeprom.getProductCode().equals("0x8014")) {
-                            this.eeprom.dump(System.out);
+                            if (fw_log != null) {
+                                try {
+                                    this.eeprom.dump(fw_log);
+                                } catch (IOException ex) {
+                                    Logger.getLogger(PerseusInstance.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                            }
                         } else {
                             this.preserie = true;
                             Logger.getLogger(PerseusInstance.class.getName()).log(Level.FINE, "Pre-production unit found.");
@@ -724,7 +728,7 @@ public class PerseusInstance implements Runnable, InputCallback {
                 
             // Print some statistics...
             double elapsed = 1.0E-3 * (this.inputQueue.getStopTime() - this.inputQueue.getStartTime());
-            Logger.getLogger(PerseusInstance.class.getName()).log(Level.INFO, "Elapsed time : " + elapsed + " s - kSamples read: " + this.inputQueue.getNbBytesReceived()/6000 + " - Rate: " + this.inputQueue.getNbBytesReceived()/6000/elapsed + " kS/s");
+            Logger.getLogger(PerseusInstance.class.getName()).log(Level.INFO, "Elapsed time : {0} s - kSamples read: {1} - Rate: {2} kS/s", new Object[]{elapsed, this.inputQueue.getNbBytesReceived()/6000, this.inputQueue.getNbBytesReceived()/6000/elapsed});
 
             // Free the input transfer queue
             if (!this.inputQueue.free()) {
@@ -860,43 +864,6 @@ public class PerseusInstance implements Runnable, InputCallback {
      */
     public SIOControl getSioControl() {
         return sioControl;
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // PERSEUS SDR instance async callback
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////
-    
-    @Override
-    public void run() {
-    }
-    
-    @Override
-    public void callback(ByteBuffer buffer, int length, Object params) {
-        if (params instanceof Map) {
-            try {
-                String dt = SDF_DATE_TIME.format(Calendar.getInstance().getTime());
-                Map<String, FileWriter> map = (Map) params;
-                FileWriter fw_raw_out = map.get("raw");
-                fw_raw_out.append("## BufferIndex="+BufferCounter+"\r\n");
-                fw_raw_out.append("## BufferReceiveTime="+dt+"\r\n");
-                buffer.rewind();
-                while (buffer.hasRemaining()) {
-                    byte i2 = buffer.get();
-                    byte i3 = buffer.get();
-                    byte i4 = buffer.get();
-                    long i = (i4 << 24 & 0x00FF000000) | (i3 << 16 & 0x0000FF0000) | (i2 << 8 & 0x000000FF00);
-                    byte q2 = buffer.get();
-                    byte q3 = buffer.get();
-                    byte q4 = buffer.get();
-                    long q = (q4 << 24 & 0x00FF000000) | (q3 << 16 & 0x0000FF0000) | (q2 << 8 & 0x000000FF00);
-                    fw_raw_out.append(i+ " " + q + "\r\n");
-                    SamplesCounter++;
-                }
-                BufferCounter++;
-            } catch (IOException ex) {
-                Logger.getLogger(PerseusTest.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
     }
 
 }

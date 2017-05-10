@@ -1,17 +1,10 @@
-package perseus.callback;
-
-import java.nio.ByteBuffer;
-
 /**
- * 
- * This interface is used for Asynchronous callback management purposes.
- * 
- * The JPerseusSDR v1.0.0 library is free software; you can redistribute 
+ * The JPerseusSDR library is free software; you can redistribute 
  * it and/or modify it under the terms of the GNU Lesser General Public 
  * License as published by the Free Software Foundation; either version 
  * 3.0 of the License, or (at your option) any later version.
  * 
- * The JPerseusSDR v1.0.0 library is distributed in the hope that it will
+ * The JPerseusSDR library is distributed in the hope that it will
  * be useful, but WITHOUT ANY WARRANTY; without even the implied warranty 
  * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  
  * See the GNU Lesser General Public License for more details.
@@ -33,12 +26,27 @@ import java.nio.ByteBuffer;
  *  originally written by Nicolangelo PALERMO and maintained by Andrea MONTEFUSCO. This library can be found at :
  *  - https://github.com/Microtelecom/libperseus-sdr
  * 
- * @author Mehdi DHAKOUANI
- * Copyright 2017, Mehdi DHAKOUANI
- * @version 1.0.0
+ * The JPerseus library, source code and documentation is published under the GNU Lesser General Public Licence v3
+ *  (available under the folder "/resources").
  * 
+ * Copyright 2017, Mehdi DHAKOUANI
  */
-public interface InputCallback {
+package perseus.callback;
+
+import java.io.IOException;
+import java.nio.ByteBuffer;
+
+/**
+ * 
+ * This abstract class must be used as the base class for Asynchronous callback management purposes.
+ * 
+ * @author Mehdi DHAKOUANI
+ * @version 1.0.1
+ */
+public abstract class InputCallback extends Thread {
+    
+    @Override
+    public abstract void run();
     
     /**
      * Method called by the caller when data is asynchronously available in the pipe.
@@ -46,6 +54,8 @@ public interface InputCallback {
      * @param length The length of the available data.
      * @param params An object containing parameters passed to the callback by the caller (eg: a file to which data is to be saved)
      */
-    public void callback(ByteBuffer buffer, int length, Object params);
+    public abstract void callback(ByteBuffer buffer, int length, Object params);
+    
+    public abstract void quit() throws IOException;
     
 }

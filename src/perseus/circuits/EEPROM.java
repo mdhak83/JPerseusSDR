@@ -1,17 +1,10 @@
-package perseus.circuits;
-
-import java.io.PrintStream;
-import java.nio.ByteBuffer;
-
 /**
- * Class used to represent the content of the EEPROM, which includes all information about the Perseus HW versioning.
- * 
- * The JPerseusSDR v1.0.0 library is free software; you can redistribute 
+ * The JPerseusSDR library is free software; you can redistribute 
  * it and/or modify it under the terms of the GNU Lesser General Public 
  * License as published by the Free Software Foundation; either version 
  * 3.0 of the License, or (at your option) any later version.
  * 
- * The JPerseusSDR v1.0.0 library is distributed in the hope that it will
+ * The JPerseusSDR library is distributed in the hope that it will
  * be useful, but WITHOUT ANY WARRANTY; without even the implied warranty 
  * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  
  * See the GNU Lesser General Public License for more details.
@@ -33,9 +26,19 @@ import java.nio.ByteBuffer;
  *  originally written by Nicolangelo PALERMO and maintained by Andrea MONTEFUSCO. This library can be found at :
  *  - https://github.com/Microtelecom/libperseus-sdr
  * 
- * @author Mehdi DHAKOUANI
  * Copyright 2017, Mehdi DHAKOUANI
- * @version 1.0.0
+ */
+package perseus.circuits;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.ByteBuffer;
+
+/**
+ * Class used to represent the content of the EEPROM, which includes all information about the Perseus HW versioning.
+ * 
+ * @author Mehdi DHAKOUANI
+ * @version 1.0.1
  */
 public class EEPROM {
     
@@ -87,13 +90,14 @@ public class EEPROM {
     }
     
     /**
-     * Dumps the EEPROM content to the provided @PrintStream.
-     * @param ps The output to dump the EEPROM's content to.
+     * Dumps the EEPROM content to the provided @FileWriter.
+     * @param fw The output to dump the EEPROM's content to.
+     * @throws java.io.IOException
      */
-    public void dump(PrintStream ps) {
-        ps.println("Microtelecom product code: " + this.productCode);
-        ps.println("Serial Number            : " + this.serialNumber+"-"+this.productSignature);
-        ps.println("Hardware version/revision: " + this.hardwareVersionRelease);
+    public void dump(FileWriter fw) throws IOException {
+        fw.write("Microtelecom product code: " + this.productCode + "\r\n");
+        fw.write("Serial Number            : " + this.serialNumber+"-"+this.productSignature + "\r\n");
+        fw.write("Hardware version/revision: " + this.hardwareVersionRelease + "\r\n");
     }
 
     /**
