@@ -1,13 +1,4 @@
-package perseus.dsp.window;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import perseus.dsp.utils.Complex;
-
 /**
- * This class computes the filter coefficients of of the n-points Hann window based on the number of points.
- * 
  * The JPerseusSDR library is free software; you can redistribute 
  * it and/or modify it under the terms of the GNU Lesser General Public 
  * License as published by the Free Software Foundation; either version 
@@ -35,13 +26,23 @@ import perseus.dsp.utils.Complex;
  *  originally written by Nicolangelo PALERMO and maintained by Andrea MONTEFUSCO. This library can be found at :
  *  - https://github.com/Microtelecom/libperseus-sdr
  * 
- * The JPerseus v1.0.0 library, source code and documentation is published under the GNU Lesser General Public Licence v3
+ * The JPerseus library, source code and documentation is published under the GNU Lesser General Public Licence v3
  *  (available under the folder "/resources").
  * 
- * @author Mehdi DHAKOUANI
  * Copyright 2017, Mehdi DHAKOUANI
- * @version 1.0.0
+ */
+package perseus.dsp.window;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import perseus.dsp.utils.Complex;
+
+/**
+ * This class computes the filter coefficients of of the n-points Hann window based on the number of points.
  * 
+ * @author Mehdi DHAKOUANI
+ * @version 1.0.0
  */
 public class HannWindow extends Window {
     
