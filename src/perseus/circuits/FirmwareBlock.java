@@ -1,10 +1,4 @@
-package perseus.circuits;
-
-import java.util.Arrays;
-
 /**
- * Class used to represent a @Firmware block of data.
- * 
  * The JPerseusSDR library is free software; you can redistribute 
  * it and/or modify it under the terms of the GNU Lesser General Public 
  * License as published by the Free Software Foundation; either version 
@@ -32,8 +26,16 @@ import java.util.Arrays;
  *  originally written by Nicolangelo PALERMO and maintained by Andrea MONTEFUSCO. This library can be found at :
  *  - https://github.com/Microtelecom/libperseus-sdr
  * 
- * @author Mehdi DHAKOUANI
  * Copyright 2017, Mehdi DHAKOUANI
+ */
+package perseus.circuits;
+
+import java.util.Arrays;
+
+/**
+ * Class used to represent a @Firmware block of data.
+ * 
+ * @author Mehdi DHAKOUANI
  * @version 1.0.0
  */
 public class FirmwareBlock {

@@ -1,23 +1,4 @@
-package perseus.circuits;
-
-import static perseus.utils.Definitions.PERSEUS_CMD_FPGACONFIG;
-import perseus.utils.XResource;
-import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.nio.channels.SeekableByteChannel;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
-import java.util.Arrays;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import static perseus.circuits.Firmware.FX2;
-import static perseus.circuits.Firmware.WB;
-
 /**
- * This class is used to enumerate all FPGAs' data, each being usable with a specific firmware with the Perseus Hardware.
- *
  * The JPerseusSDR library is free software; you can redistribute 
  * it and/or modify it under the terms of the GNU Lesser General Public 
  * License as published by the Free Software Foundation; either version 
@@ -49,8 +30,29 @@ import static perseus.circuits.Firmware.WB;
  *  originally written by Nicolangelo PALERMO and maintained by Andrea MONTEFUSCO. This library can be found at :
  *  - https://github.com/Microtelecom/libperseus-sdr
  * 
- * @author Mehdi DHAKOUANI
  * Copyright 2017, Mehdi DHAKOUANI
+ */
+package perseus.circuits;
+
+import static perseus.utils.Definitions.PERSEUS_CMD_FPGACONFIG;
+import perseus.utils.XResource;
+import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.nio.channels.SeekableByteChannel;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import static perseus.circuits.Firmware.FX2;
+import static perseus.circuits.Firmware.WB;
+
+/**
+ * This class is used to enumerate all FPGAs' data, each being usable with a specific firmware with the Perseus Hardware.
+ * 
+ * @author Mehdi DHAKOUANI
  * @version 1.0.0
  */
 public enum FPGA {

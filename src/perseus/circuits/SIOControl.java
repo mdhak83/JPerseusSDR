@@ -1,13 +1,4 @@
-package perseus.circuits;
-
-import static perseus.utils.Definitions.PERSEUS_ADCSAMPLINGFREQKHZ;
-import static perseus.utils.Definitions.PERSEUS_CMD_FPGASIO;
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-
 /**
- * This class represents the FX2 MCU <-> FPGA serial IO data structure
- * 
  * The JPerseusSDR library is free software; you can redistribute 
  * it and/or modify it under the terms of the GNU Lesser General Public 
  * License as published by the Free Software Foundation; either version 
@@ -35,8 +26,19 @@ import java.nio.ByteOrder;
  *  originally written by Nicolangelo PALERMO and maintained by Andrea MONTEFUSCO. This library can be found at :
  *  - https://github.com/Microtelecom/libperseus-sdr
  * 
- * @author Mehdi DHAKOUANI
  * Copyright 2017, Mehdi DHAKOUANI
+ */
+package perseus.circuits;
+
+import static perseus.utils.Definitions.PERSEUS_ADCSAMPLINGFREQKHZ;
+import static perseus.utils.Definitions.PERSEUS_CMD_FPGASIO;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+
+/**
+ * This class represents the FX2 MCU <-> FPGA serial IO data structure
+ * 
+ * @author Mehdi DHAKOUANI
  * @version 1.0.0
  */
 public class SIOControl {

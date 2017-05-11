@@ -1,8 +1,4 @@
-package perseus.circuits;
-
 /**
- * Class used to enumerates all allowed values for attenuation.
- * 
  * The JPerseusSDR library is free software; you can redistribute 
  * it and/or modify it under the terms of the GNU Lesser General Public 
  * License as published by the Free Software Foundation; either version 
@@ -30,8 +26,14 @@ package perseus.circuits;
  *  originally written by Nicolangelo PALERMO and maintained by Andrea MONTEFUSCO. This library can be found at :
  *  - https://github.com/Microtelecom/libperseus-sdr
  * 
- * @author Mehdi DHAKOUANI
  * Copyright 2017, Mehdi DHAKOUANI
+ */
+package perseus.circuits;
+
+/**
+ * Class used to enumerates all allowed values for attenuation.
+ * 
+ * @author Mehdi DHAKOUANI
  * @version 1.0.0
  */
 public enum Attenuator {

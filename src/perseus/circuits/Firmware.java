@@ -1,20 +1,4 @@
-package perseus.circuits;
-
-import perseus.utils.XResource;
-import perseus.utils.XTools;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
- * This class is used to enumerate and preload both firmwares (Narroband and Wideband) usable with the Perseus Hardware.
- *
  * The JPerseusSDR library is free software; you can redistribute 
  * it and/or modify it under the terms of the GNU Lesser General Public 
  * License as published by the Free Software Foundation; either version 
@@ -46,8 +30,26 @@ import java.util.logging.Logger;
  *  originally written by Nicolangelo PALERMO and maintained by Andrea MONTEFUSCO. This library can be found at :
  *  - https://github.com/Microtelecom/libperseus-sdr
  * 
- * @author Mehdi DHAKOUANI
  * Copyright 2017, Mehdi DHAKOUANI
+ */
+package perseus.circuits;
+
+import perseus.utils.XResource;
+import perseus.utils.XTools;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/**
+ * This class is used to enumerate and preload both firmwares (Narroband and Wideband) usable with the Perseus Hardware.
+ *
+ * @author Mehdi DHAKOUANI
  * @version 1.0.0
  */
 public enum Firmware {

@@ -1,20 +1,4 @@
-package perseus.circuits;
-
-import perseus.PerseusInstance;
-import perseus.callback.InputQueue;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
- * Class that can be used in a never-ending loop to modify some parametters of the Perseus HW.
- *  (not used in this version)
- * In such a case, remove all debug logging and start a new thread of this class
- *      FIFO fifo = FIFO.Make(@PerseusInstance)
- *      fifo.start();
- * 
  * The JPerseusSDR library is free software; you can redistribute 
  * it and/or modify it under the terms of the GNU Lesser General Public 
  * License as published by the Free Software Foundation; either version 
@@ -42,8 +26,26 @@ import java.util.logging.Logger;
  *  originally written by Nicolangelo PALERMO and maintained by Andrea MONTEFUSCO. This library can be found at :
  *  - https://github.com/Microtelecom/libperseus-sdr
  * 
- * @author Mehdi DHAKOUANI
  * Copyright 2017, Mehdi DHAKOUANI
+ */
+package perseus.circuits;
+
+import perseus.PerseusInstance;
+import perseus.callback.InputQueue;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/**
+ * Class that can be used in a never-ending loop to modify some parametters of the Perseus HW.
+ *  (not used in this version)
+ * In such a case, remove all debug logging and start a new thread of this class
+ *      FIFO fifo = FIFO.Make(@PerseusInstance)
+ *      fifo.start();
+ * 
+ * @author Mehdi DHAKOUANI
  * @version 1.0.0
  */
 public class FIFO implements Runnable {
