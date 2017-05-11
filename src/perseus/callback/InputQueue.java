@@ -1,17 +1,4 @@
-package perseus.callback;
-
-import perseus.PerseusInstance;
-import static perseus.utils.Definitions.PERSEUS_EP_DATAIN;
-import java.nio.ByteBuffer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.usb4java.LibUsb;
-import org.usb4java.Transfer;
-import org.usb4java.TransferCallback;
-
 /**
- * This class organizes the asynchronous transfers of data from the USB buffers to the application.
- * 
  * The JPerseusSDR library is free software; you can redistribute 
  * it and/or modify it under the terms of the GNU Lesser General Public 
  * License as published by the Free Software Foundation; either version 
@@ -39,8 +26,23 @@ import org.usb4java.TransferCallback;
  *  originally written by Nicolangelo PALERMO and maintained by Andrea MONTEFUSCO. This library can be found at :
  *  - https://github.com/Microtelecom/libperseus-sdr
  * 
- * @author Mehdi DHAKOUANI
  * Copyright 2017, Mehdi DHAKOUANI
+ */
+package perseus.callback;
+
+import perseus.PerseusInstance;
+import static perseus.utils.Definitions.PERSEUS_EP_DATAIN;
+import java.nio.ByteBuffer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.usb4java.LibUsb;
+import org.usb4java.Transfer;
+import org.usb4java.TransferCallback;
+
+/**
+ * This class organizes the asynchronous transfers of data from the USB buffers to the application.
+ * 
+ * @author Mehdi DHAKOUANI
  * @version 1.0.0
  */
 public class InputQueue implements TransferCallback {
