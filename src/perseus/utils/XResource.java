@@ -1,18 +1,4 @@
-package perseus.utils;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.HashMap;
-import java.util.Map;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
-
 /**
- * Class used to transfer embedded resources on the computer.
- *
  * The JPerseusSDR library is free software; you can redistribute 
  * it and/or modify it under the terms of the GNU Lesser General Public 
  * License as published by the Free Software Foundation; either version 
@@ -40,11 +26,27 @@ import org.apache.commons.io.IOUtils;
  *  originally written by Nicolangelo PALERMO and maintained by Andrea MONTEFUSCO. This library can be found at :
  *  - https://github.com/Microtelecom/libperseus-sdr
  * 
- * The JPerseus v1.0.0 library, source code and documentation is published under the GNU Lesser General Public Licence v3
+ * The JPerseus library, source code and documentation is published under the GNU Lesser General Public Licence v3
  *  (available under the folder "/resources").
  * 
- * @author Mehdi DHAKOUANI
  * Copyright 2017, Mehdi DHAKOUANI
+ */
+package perseus.utils;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.HashMap;
+import java.util.Map;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
+
+/**
+ * Class used to transfer embedded resources on the computer.
+ *
+ * @author Mehdi DHAKOUANI
  * @version 1.0.0
  * 
  */

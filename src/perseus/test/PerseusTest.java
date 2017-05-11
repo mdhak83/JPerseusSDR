@@ -26,7 +26,7 @@
  *  originally written by Nicolangelo PALERMO and maintained by Andrea MONTEFUSCO. This library can be found at :
  *  - https://github.com/Microtelecom/libperseus-sdr
  * 
- * The JPerseus v1.0.0 library, source code and documentation is published under the GNU Lesser General Public Licence v3
+ * The JPerseus library, source code and documentation is published under the GNU Lesser General Public Licence v3
  *  (available under the folder "/resources").
  * 
  * Copyright 2017, Mehdi DHAKOUANI
