@@ -33,17 +33,17 @@
  */
 package perseus.dsp.window;
 
-import cern.jet.math.tdouble.Bessel;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import perseus.dsp.utils.Complex;
+import perseus.dsp.maths.Bessel;
+import perseus.dsp.maths.Complex;
 
 /**
  * This class computes the filter coefficients of of the n-points Kaiser window based on the number of points and the β parameter.
  * 
  * @author Mehdi DHAKOUANI
- * @version 1.0.0
+ * @version 1.0.1
  * 
  */
 public class KaiserWindow extends Window {
@@ -103,7 +103,7 @@ public class KaiserWindow extends Window {
         double kwinsum = 0;
         for (int n = 0 ; n < windowSize ; n++) {
             double temp = 2 * beta * Math.sqrt(n * (windowSize - 1 - n)) / (windowSize-1);
-            double coefficient = Bessel.i0(temp) / Bessel.i0(beta);
+            double coefficient = Bessel.I0(temp) / Bessel.I0(beta);
             window.result[n] = coefficient;
             kwinsum += coefficient;
         }
