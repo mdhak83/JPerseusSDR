@@ -1,6 +1,6 @@
 package perseus.dsp.fft;
 
-import perseus.dsp.utils.Complex;
+import perseus.dsp.maths.Complex;
 import java.util.Arrays;
 
 /******************************************************************************
