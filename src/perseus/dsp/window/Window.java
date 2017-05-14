@@ -38,7 +38,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import perseus.dsp.utils.Complex;
+import perseus.dsp.maths.Complex;
 
 /**
  * Abstract class used for Filter Windowing operations
