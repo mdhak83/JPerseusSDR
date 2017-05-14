@@ -44,7 +44,7 @@ import perseus.dsp.maths.Complex;
  * Abstract class used for Filter Windowing operations
  * 
  * @author Mehdi DHAKOUANI
- * @version 1.0.0
+ * @version 1.0.1
  */
 public abstract class Window {
     

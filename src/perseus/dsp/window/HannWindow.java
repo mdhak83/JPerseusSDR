@@ -42,7 +42,7 @@ import perseus.dsp.maths.Complex;
  * This class computes the filter coefficients of of the n-points Hann window based on the number of points.
  * 
  * @author Mehdi DHAKOUANI
- * @version 1.0.0
+ * @version 1.0.1
  */
 public class HannWindow extends Window {
     

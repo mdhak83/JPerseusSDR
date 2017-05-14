@@ -23,7 +23,11 @@ public class SimpleFFT {
     
     public final static Complex ZERO = new Complex(0, 0);
 
-    // compute the SimpleFFT of x[], assuming its length is a power of 2
+    /**
+     * Compute the SimpleFFT of x[], assuming the number of points is a power of 2
+     * @param x The n-points @Complex values to FFT
+     * @return An array of n-points @Complex resulting of the FFT
+     */
     public static Complex[] FFT(Complex[] x) {
         if (x == null) {
             throw new IllegalArgumentException("The provided argument must not be 'null'.");
@@ -62,7 +66,11 @@ public class SimpleFFT {
         return fft;
     }
 
-    // Compute the inverse SimpleFFT of x[], assuming its length is a power of 2
+    /**
+     * Compute the inverse SimpleFFT of x[], assuming the number of points is a power of 2
+     * @param x an array of n-points @Complex
+     * @return an array of n-points @Complex resulting of the inverse FFT
+     */
     public static Complex[] IFFT(Complex[] x) {
         if (x == null) {
             throw new IllegalArgumentException("The provided argument must not be 'null'.");
@@ -155,9 +163,15 @@ public class SimpleFFT {
         return cconvolve(a, b);
     }
 
-    // display an array of Complex numbers to standard output
+    /** 
+     * Display an array of Complex values to standard output
+     * @param x The @Complex values to display
+     * @param title The @String representing a title to display
+     */
     public static void show(Complex[] x, String title) {
-        System.out.println(title);
+        if (title != null) {
+            System.out.println(title);
+        }
         System.out.println("-------------------");
         for (Complex x1 : x) {
             System.out.println(x1);
