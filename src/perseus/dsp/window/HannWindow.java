@@ -36,7 +36,7 @@ package perseus.dsp.window;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import perseus.dsp.utils.Complex;
+import perseus.dsp.maths.Complex;
 
 /**
  * This class computes the filter coefficients of of the n-points Hann window based on the number of points.
